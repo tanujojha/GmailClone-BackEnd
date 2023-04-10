@@ -40,9 +40,9 @@ app.use("/auth", googleAuthRoutes, userSigningRoutes);  // /auth uses both googl
 app.use("/email", emailRoutes);
 
 //test vercel
-app.get("/", async(req, res)=>{
-  res.send("Hello")
-})
+// app.get("/", async(req, res)=>{
+//   res.send("Hello")
+// })
 
 
 app.listen(PORT, () => {
