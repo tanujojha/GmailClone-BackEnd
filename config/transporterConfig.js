@@ -3,13 +3,13 @@ dotenv.config();
 import nodemailer from "nodemailer";
 
 
-const transporter = nodemailer.createTransport({
+let transporter = await nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
   auth: {
     type: "OAuth2",
-    clientId: process.env.CLIENTID, 
+    clientId: process.env.CLIENTID,
     clientSecret: process.env.CLIENTSECRETE,
   },
 });

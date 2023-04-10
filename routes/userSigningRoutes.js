@@ -23,6 +23,7 @@ router.post("/register", async(req, res)=>{
     try {
 
         const userExist = await User.findOne({email: email})
+
         if(userExist){
             res.status(400).send("Email already Registered")
         }else{
@@ -58,6 +59,8 @@ router.post("/login", async(req, res)=>{
     try {
         // find user with email from DB
         const user = await User.findOne({email: email});
+        // this is to send the user detail to client
+        const userToSendToClient = await User.findOne({email: email}, 'name email');
         if(!user){
             res.status(400).send("Email does not exits")
         }else{
@@ -75,7 +78,7 @@ router.post("/login", async(req, res)=>{
                 //sign jwt
                 const token = jwt.sign(payload, process.env.JWTSECRET);
                 console.log("Login Successfull");
-                res.status(200).send({message: "Success", token})
+                res.status(200).send({message: "Success", token, user: userToSendToClient})
     
             }
 

@@ -15,6 +15,7 @@ passport.use(
       callbackURL: process.env.CALLBACKURL, 
     },
     async (accessToken, refreshToken, profile, cb)=> {
+
       const currentUser = await GUser.findOne({googleID: profile.id})
       if(!currentUser){
         const newUser = await new GUser({
@@ -29,13 +30,7 @@ passport.use(
             cb(null, newUser)
         } 
       }else{
-        const updatedCurntUser = await GUser.findOneAndUpdate(
-          {googleID: profile.id}, 
-          {accessToken: accessToken, refreshToken: refreshToken},
-          {new: true}
-        )
-        // console.log(updatedCurntUser);
-        cb(null, updatedCurntUser)
+        cb(null, currentUser)
       }
     }
   )
