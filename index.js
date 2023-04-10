@@ -39,7 +39,10 @@ app.use(passport.session());
 app.use("/auth", googleAuthRoutes, userSigningRoutes);  // /auth uses both googleAuth routes and normal auth routes
 app.use("/email", emailRoutes);
 
-
+//test vercel
+app.get("/", async(req, res)=>{
+  res.send("Hello")
+})
 
 
 app.listen(PORT, () => {
